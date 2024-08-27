@@ -3,16 +3,21 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
 
 class TeacherController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $json = Teacher::query()
+        ->whereBetween('id', [1, 50])
+        ->get();;
+
+        return response()->json([
+            'status code' => '200 OK',
+            'data' => $json
+        ]);
     }
 
     /**
@@ -28,7 +33,7 @@ class TeacherController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request);
     }
 
     /**
@@ -36,7 +41,11 @@ class TeacherController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $json = Teacher::find($id);
+        return response()->json([
+            'status code' => "200",
+            'data' => $json
+        ]);
     }
 
     /**
