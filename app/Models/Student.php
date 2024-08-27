@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Student extends Model
 {
     use HasFactory;
+
+    public function province(){
+        //            ส่วนกลับ    Model             FK         PK
+        return $this->belongsTo(Province::class,'province_id','id');
+    }
 }
