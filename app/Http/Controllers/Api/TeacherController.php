@@ -33,7 +33,19 @@ class TeacherController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        // เพิ่มข้อมูลลง Database
+       $json = Teacher::create([
+            'title_id' => $request->title_id,
+            'name' => $request->name,
+            'lastname' => $request->lastname,
+            'email' => $request->email,
+            'province_id' => $request->province_id,
+        ]);
+
+        return response()->json([
+            'data' => $json,
+        ]);
+
     }
 
     /**
@@ -61,7 +73,15 @@ class TeacherController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        dd($request->name);
+
+        $json = Teacher::where('id',$id)->update([
+            'name' => 'anut',
+        ]);
+
+        return response()->json([
+            'data' =>  $json
+        ]);
     }
 
     /**
@@ -69,6 +89,11 @@ class TeacherController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // ลบข้อมูลตาม ไอดีที่รับค่าเข้ามา
+        $json = Teacher::where('id',$id)->delete();
+
+        return response()->json([
+            'data' => $json,
+        ]);
     }
 }
